@@ -51,7 +51,7 @@
                     <div class="inline-flex items-center gap-2 bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/40 mb-1">
                         <span>مدارس بواكير الأهلية | اليوم الوطني السعودي 96</span>
                     </div>
-                    <h1 class="text-2xl md:text-3xl font-black text-white leading-tight">رسائل من القلب إلى أجيال الوطن</h1>
+                    <h1 class="text-2xl md:text-3xl font-black text-white leading-tight">رسائل وإبداعات من القلب إلى أجيال الوطن</h1>
                 </div>
             </div>
             
@@ -70,7 +70,7 @@
             <div class="relative z-10 max-w-3xl mx-auto space-y-2">
                 <span class="bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/30 inline-block mb-1">اليوم الوطني 96</span>
                 <p class="text-base md:text-lg font-bold leading-relaxed text-emerald-50">
-                    "بالتعليم تبنى الأوطان، وبأبنائنا تتجدد الطموحات.. في عامنا الـ 96 نواصل رحلة الشغف والتأسيس لمستقبل وطن لا يرضى إلا بالقمة."
+                    "بالتعليم تبنى الأوطان، وبأبنائنا تتجدد الطموحات.. شاركونا كلماتكم، رسوماتكم، ومقاطع الفيديو احتفاءً بوطن الشموخ والعطاء."
                 </p>
             </div>
         </section>
@@ -78,8 +78,8 @@
         <!-- Form Section -->
         <section class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-saudiFlag/20">
             <div class="text-center mb-6">
-                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">منصة المشاركات الوطنية - مدارس بواكير</h2>
-                <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة</p>
+                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">منصة المشاركات والإبداعات الوطنية</h2>
+                <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة وطلبتها الأعزاء</p>
             </div>
 
             <form id="submissionForm" class="space-y-6">
@@ -90,6 +90,7 @@
                     <select id="userRole" required class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
                         <option value="" disabled selected>اختر الصفة...</option>
                         <option value="ولي أمر (أب / أم)">ولي أمر (أب / أم)</option>
+                        <option value="طالب / طالبة">طالب / طالبة</option>
                         <option value="مديرة المدرسة">مديرة المدرسة</option>
                         <option value="موجهة طلابية">موجهة طلابية</option>
                         <option value="مشرفة عامة">مشرفة عامة</option>
@@ -104,7 +105,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-bold text-saudiDark mb-1">الاسم الكريم (المُشارك) *</label>
-                        <input type="text" id="participantName" required placeholder="ادخل الاسم الثلاثي" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <input type="text" id="participantName" required placeholder="ادخل الاسم الكريم" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-saudiDark mb-1">
@@ -121,8 +122,6 @@
 
                 <!-- Questions Block -->
                 <div class="bg-emerald-50/80 p-6 rounded-2xl border-2 border-saudiFlag/30 space-y-6">
-                    
-                    <!-- Question 1 -->
                     <div class="flex flex-col gap-2">
                         <label class="text-lg font-black text-saudiDark leading-relaxed">
                             كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟ *
@@ -132,13 +131,19 @@
 
                     <hr class="border-emerald-200/80">
 
-                    <!-- Question 2 -->
                     <div class="flex flex-col gap-2">
                         <label class="text-lg font-black text-saudiDark leading-relaxed">
                             شاركونا موقفًا من حياتكم اليومية يُعلّم طفلكم حب الوطن… دون أن تقولوا كلمة «وطن». *
                         </label>
                         <textarea id="answer2" rows="3" required placeholder="اكتب موقفك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                     </div>
+                </div>
+
+                <!-- Media Upload Field -->
+                <div class="bg-amber-50/50 p-5 rounded-2xl border-2 border-dashed border-gold/60">
+                    <label class="block text-sm font-bold text-saudiDark mb-1">إرفاق صورة أو رسمة أو فيديو (اختياري)</label>
+                    <p class="text-xs text-slate-500 mb-3">يمكنك رفع صورة مشاركة الطالب أو مقطع فيديو احتفالي قصير.</p>
+                    <input type="file" id="mediaFile" accept="image/*,video/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark transition cursor-pointer">
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
@@ -181,7 +186,7 @@
     <!-- Firebase Integration & Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc, getDocs } 
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc } 
                from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // Firebase Configuration
@@ -206,7 +211,7 @@
         const cardsGrid = document.getElementById("cardsGrid");
         const counter = document.getElementById("counter");
 
-        // Handle Form Submission
+        // Handle Form Submission with Media Conversion
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
@@ -216,11 +221,24 @@
             const studentGrade = document.getElementById('studentGrade').value.trim();
             const answer1 = document.getElementById('answer1').value.trim();
             const answer2 = document.getElementById('answer2').value.trim();
+            const mediaFile = document.getElementById('mediaFile').files[0];
 
             if (!participantName || !answer1 || !answer2) return;
 
             submitBtn.disabled = true;
-            submitBtn.innerText = "جاري الحفظ في النظام السحابي...";
+            submitBtn.innerText = "جاري رفع الملف وحفظ المشاركة بالسحابة...";
+
+            let mediaData = null;
+            let mediaType = null;
+
+            if (mediaFile) {
+                try {
+                    mediaData = await toBase64(mediaFile);
+                    mediaType = mediaFile.type.startsWith('video') ? 'video' : 'image';
+                } catch (err) {
+                    console.error("Error reading file", err);
+                }
+            }
 
             try {
                 await addDoc(postsRef, {
@@ -230,11 +248,13 @@
                     studentGrade: studentGrade || 'غير محدد',
                     answer1,
                     answer2,
+                    mediaData,
+                    mediaType,
                     createdAt: serverTimestamp()
                 });
 
                 form.reset();
-                alert('تمت إضافة مشاركتكم الوطنية وحفظها بنجاح دائم في المعرض!');
+                alert('تمت إضافة مشاركتك الوطنية مع الملف المرفق وحفظها بنجاح دائم في المعرض!');
             } catch (error) {
                 console.error("Error adding document: ", error);
                 alert("حدث خطأ أثناء الحفظ، يرجى المحاولة مرة أخرى.");
@@ -242,6 +262,14 @@
                 submitBtn.disabled = false;
                 submitBtn.innerText = "إرسال المشاركة ونشرها في المعرض";
             }
+        });
+
+        // Helper to convert file to Base64
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
         });
 
         // Real-time listener for posts
@@ -268,6 +296,27 @@
 
                 const studentDetails = sub.studentName && sub.studentName !== 'غير محدد' ? ` | الطالب/ـة: ${sub.studentName}` : '';
 
+                // Media HTML generation
+                let mediaHTML = '';
+                if (sub.mediaData) {
+                    if (sub.mediaType === 'video') {
+                        mediaHTML = `
+                            <div class="mt-3 rounded-xl overflow-hidden border border-emerald-100 bg-black">
+                                <video controls class="w-full max-h-60 object-contain">
+                                    <source src="${sub.mediaData}" type="video/mp4">
+                                    متصفحك لا يدعم عرض الفيديو.
+                                </video>
+                            </div>
+                        `;
+                    } else {
+                        mediaHTML = `
+                            <div class="mt-3 rounded-xl overflow-hidden border border-emerald-100 bg-emerald-50/30 flex justify-center">
+                                <img src="${sub.mediaData}" alt="صورة المشاركة" class="max-h-60 object-contain rounded-lg">
+                            </div>
+                        `;
+                    }
+                }
+
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
@@ -290,6 +339,7 @@
                                 <p class="text-xs font-bold text-saudiFlag mb-1">موقف من الحياة اليومية:</p>
                                 <p class="text-slate-700 text-sm font-medium leading-relaxed">${escapeHTML(sub.answer2)}</p>
                             </div>
+                            ${mediaHTML}
                         </div>
                     </div>
                 `;
