@@ -1,37 +1,327 @@
-<!-- Questions Block -->
-<div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-6">
-    
-    <!-- Part 1 -->
-    <div>
-        <label class="block text-base md:text-lg font-black text-saudiDark leading-relaxed mb-2">
-            كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟ *
-        </label>
-        <textarea id="answer1" rows="3" required placeholder="اكتب إجابتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدارس بواكير - تفعيل اليوم الوطني 96</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saudiFlag: '#006C35',
+                        saudiDark: '#004B25',
+                        saudiLight: '#008E46',
+                        gold: '#D4AF37',
+                        goldLight: '#F3E5AB'
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .saudi-gradient {
+            background: linear-gradient(135deg, #006C35 0%, #004B25 100%);
+        }
+    </style>
+</head>
+<body class="bg-emerald-50/40 text-slate-800 min-h-screen flex flex-col">
 
-    <hr class="border-emerald-200">
+    <!-- Header Section -->
+    <header class="saudi-gradient text-white py-8 px-4 shadow-xl border-b-4 border-gold relative overflow-hidden">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            
+            <div class="flex flex-col md:flex-row items-center gap-4 text-center md:text-right">
+                <div class="bg-white p-2 rounded-2xl shadow-md border-2 border-gold/50 flex items-center justify-center w-20 h-20 shrink-0">
+                    <img src="https://bawakeerschools.com/wp-content/uploads/2022/01/logo-1.png" 
+                         alt="شعار مدارس بواكير الأهلية" 
+                         class="max-h-full max-w-full object-contain"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'text-saudiFlag font-black text-xs text-center\'>مدارس<br>بواكير</div>';">
+                </div>
 
-    <!-- Part 2 -->
-    <div>
-        <label class="block text-base md:text-lg font-black text-saudiDark leading-relaxed mb-2">
-            شاركونا موقفًا من حياتكم اليومية يُعلّم طفلكم حب الوطن… دون أن تقولوا كلمة «وطن». *
-        </label>
-        <textarea id="answer2" rows="3" required placeholder="اكتب موقفك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium mb-4"></textarea>
-        
-        <!-- Media Upload Block -->
-        <div class="bg-white p-4 rounded-xl border border-emerald-200">
-            <label class="block text-sm font-bold text-slate-700 mb-2">
-                إرفاق وسائط (اختياري):
-            </label>
-            <div class="text-sm font-bold text-emerald-800 mb-3 flex items-center gap-2 flex-wrap">
-                <span>🎙️ بالصوت</span>
-                <span class="text-slate-300">|</span>
-                <span>📸 بالصورة</span>
-                <span class="text-slate-300">|</span>
-                <span>🎥 بالفيديو</span>
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/40 mb-1">
+                        <span>مدارس بواكير الأهلية | اليوم الوطني السعودي 96</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-black text-white leading-tight">رسائل من القلب إلى أجيال الوطن</h1>
+                </div>
             </div>
-            <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-emerald-100 file:text-saudiDark hover:file:bg-emerald-200 cursor-pointer">
+            
+            <div class="flex items-center gap-3 bg-saudiDark/80 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-gold/30 shadow-inner shrink-0">
+                <span class="text-sm font-semibold text-emerald-100">إجمالي المشاركات:</span>
+                <span id="counter" class="text-2xl font-black text-gold">0</span>
+            </div>
         </div>
-    </div>
+    </header>
 
-</div>
+    <main class="max-w-4xl mx-auto w-full p-4 flex-grow space-y-8 -mt-2 relative z-20">
+
+        <!-- Banner Section -->
+        <section class="bg-gradient-to-r from-emerald-900 via-saudiFlag to-emerald-900 text-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gold/40 text-center relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black pointer-events-none">96</div>
+            <div class="relative z-10 max-w-3xl mx-auto space-y-2">
+                <span class="bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/30 inline-block mb-1">اليوم الوطني 96</span>
+                <p class="text-base md:text-lg font-bold leading-relaxed text-emerald-50">
+                    "بالتعليم تبنى الأوطان، وبأبنائنا تتجدد الطموحات.. في عامنا الـ 96 نواصل رحلة الشغف والتأسيس لمستقبل وطن لا يرضى إلا بالقمة."
+                </p>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-saudiFlag/20">
+            <div class="text-center mb-6">
+                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">منصة المشاركات الوطنية - مدارس بواكير</h2>
+                <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة</p>
+            </div>
+
+            <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                
+                <!-- Role Selection -->
+                <div>
+                    <label class="block text-sm font-bold text-saudiDark mb-1">صفة المشارك *</label>
+                    <select id="userRole" required onchange="toggleStudentNameRequired()" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
+                        <option value="" disabled selected>اختر الصفة...</option>
+                        <option value="ولي أمر (أب / أم)">ولي أمر (أب / أم)</option>
+                        <option value="مديرة المدرسة">مديرة المدرسة</option>
+                        <option value="موجهة طلابية">موجهة طلابية</option>
+                        <option value="مشرفة عامة">مشرفة عامة</option>
+                        <option value="مشرفة اللغة العربية">مشرفة اللغة العربية</option>
+                        <option value="مشرفة اللغة الإنجليزية">مشرفة اللغة الإنجليزية</option>
+                        <option value="مشرفة المواد العلمية">مشرفة المواد العلمية</option>
+                        <option value="معلّمة">معلّمة</option>
+                        <option value="إدارية">إدارية</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-saudiDark mb-1">الاسم الكريم (المُشارك) *</label>
+                        <input type="text" id="participantName" required placeholder="ادخل الاسم الثلاثي" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-saudiDark mb-1">
+                            اسم الطالب / الطالبة <span id="studentReqMark" class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="studentName" required placeholder="مطلوب لولي الأمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-saudiDark mb-1">الصف / الفصل *</label>
+                    <input type="text" id="studentGrade" required placeholder="مثال: الأول ابتدائي (أ)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                </div>
+
+                <!-- Questions Block -->
+                <div class="bg-emerald-50/80 p-6 rounded-2xl border-2 border-saudiFlag/30 space-y-6">
+                    
+                    <!-- Question 1 -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-lg font-black text-saudiDark leading-relaxed">
+                            كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟ *
+                        </label>
+                        <textarea id="answer1" rows="3" required placeholder="اكتب إجابتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
+                    </div>
+
+                    <hr class="border-emerald-200/80">
+
+                    <!-- Question 2 -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-lg font-black text-saudiDark leading-relaxed">
+                            شاركونا موقفًا من حياتكم اليومية يُعلّم طفلكم حب الوطن… دون أن تقولوا كلمة «وطن». *
+                        </label>
+                        <textarea id="answer2" rows="3" required placeholder="اكتب موقفك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
+                    </div>
+
+                    <!-- Media Upload Block -->
+                    <div class="bg-white p-4 rounded-xl border-2 border-emerald-100 space-y-3 mt-4">
+                        <label class="block text-sm font-bold text-slate-700">
+                            إرفاق وسائط (اختياري):
+                        </label>
+                        <div class="flex items-center gap-2 text-sm font-bold text-saudiDark bg-emerald-50 p-2.5 rounded-lg border border-emerald-200 w-fit flex-wrap">
+                            <span>🎙️ بالصوت</span>
+                            <span class="text-emerald-300">|</span>
+                            <span>📸 بالصورة</span>
+                            <span class="text-emerald-300">|</span>
+                            <span>🎥 بالفيديو</span>
+                        </div>
+                        <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
+                    </div>
+
+                </div>
+
+                <button type="submit" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
+                    <span>إرسال المشاركة ونشرها في المعرض</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Dynamic Live Gallery -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b-2 border-saudiFlag/20 pb-2">
+                <span class="text-xl">🌴</span>
+                <h3 class="text-xl font-black text-saudiDark">معرض المشاعر والمشاركات الوطنية</h3>
+            </div>
+
+            <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Cards Container -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="saudi-gradient text-white py-8 mt-12 border-t-2 border-gold relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-3 relative z-10">
+            <p class="text-base font-bold text-goldLight">مدارس بواكير الأهلية - دمت يا وطني شامخاً عزيزاً</p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs md:text-sm font-semibold text-emerald-100 bg-saudiDark/60 py-2.5 px-4 rounded-xl border border-gold/20 max-w-2xl mx-auto">
+                <span>إعداد وكيلة الشؤون التعليمية: <strong>أ. بدرية العتيبي</strong></span>
+                <span class="hidden sm:inline text-gold">|</span>
+                <span>إشراف مديرة المدرسة: <strong>أ. ريم الدوسري</strong></span>
+            </div>
+
+            <p class="text-xs text-emerald-200/70 pt-2">جميع الحقوق محفوظة لمدارس بواكير © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Logic JS -->
+    <script>
+        let submissions = [];
+
+        function toggleStudentNameRequired() {
+            const role = document.getElementById('userRole').value;
+            const studentInput = document.getElementById('studentName');
+            const reqMark = document.getElementById('studentReqMark');
+
+            if (role === 'ولي أمر (أب / أم)') {
+                studentInput.required = true;
+                reqMark.style.display = 'inline';
+            } else {
+                studentInput.required = false;
+                reqMark.style.display = 'none';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const userRole = document.getElementById('userRole').value;
+            const participantName = document.getElementById('participantName').value;
+            const studentName = document.getElementById('studentName').value;
+            const studentGrade = document.getElementById('studentGrade').value;
+            const answer1 = document.getElementById('answer1').value;
+            const answer2 = document.getElementById('answer2').value;
+            const mediaInput = document.getElementById('mediaFile');
+
+            let mediaUrl = null;
+            let mediaType = null;
+
+            if (mediaInput.files && mediaInput.files[0]) {
+                const file = mediaInput.files[0];
+                mediaUrl = URL.createObjectURL(file);
+                if (file.type.startsWith('image/')) mediaType = 'image';
+                else if (file.type.startsWith('audio/')) mediaType = 'audio';
+                else if (file.type.startsWith('video/')) mediaType = 'video';
+            }
+
+            const newEntry = {
+                id: Date.now(),
+                userRole,
+                participantName,
+                studentName: studentName.trim() !== '' ? studentName : 'غير محدد',
+                studentGrade,
+                answer1,
+                answer2,
+                mediaUrl,
+                mediaType
+            };
+
+            submissions.unshift(newEntry);
+            updateUI();
+            document.getElementById('submissionForm').reset();
+            toggleStudentNameRequired();
+            alert('تمت إضافة مشاركتكم الوطنية بنجاح وتم عرضها في المعرض!');
+        }
+
+        function deleteSubmission(id) {
+            if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة؟')) {
+                submissions = submissions.filter(item => item.id !== id);
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('counter').innerText = submissions.length;
+
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+
+            submissions.forEach(sub => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border-2 border-emerald-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all border-t-8 border-t-saudiFlag relative overflow-hidden flex flex-col justify-between';
+
+                let mediaHTML = '';
+                if (sub.mediaType === 'image') {
+                    mediaHTML = `<img src="${sub.mediaUrl}" class="w-full h-48 object-cover rounded-xl mt-3 border border-emerald-100" alt="مشاركة بالصورة">`;
+                } else if (sub.mediaType === 'audio') {
+                    mediaHTML = `
+                        <div class="mt-3 bg-emerald-50 p-2.5 rounded-xl border border-emerald-100">
+                            <span class="text-xs font-bold text-saudiDark mb-1 block">🎙️ استمع للتسجيل الصوتي:</span>
+                            <audio controls class="w-full h-8">
+                                <source src="${sub.mediaUrl}">
+                                متصفحك لا يدعم تشغيل الصوت.
+                            </audio>
+                        </div>`;
+                } else if (sub.mediaType === 'video') {
+                    mediaHTML = `
+                        <div class="mt-3 rounded-xl overflow-hidden border border-emerald-100">
+                            <video controls class="w-full max-h-56 object-cover bg-black">
+                                <source src="${sub.mediaUrl}">
+                                متصفحك لا يدعم تشغيل الفيديو.
+                            </video>
+                        </div>`;
+                }
+
+                const studentDetails = sub.studentName !== 'غير محدد' ? ` | الطالب/ـة: ${sub.studentName}` : '';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-extrabold text-saudiFlag text-lg">${sub.participantName}</h4>
+                                <p class="text-xs text-slate-500 font-semibold">${sub.userRole} (${sub.studentGrade})${studentDetails}</p>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button onclick="deleteSubmission(${sub.id})" title="حذف المشاركة" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
+                                <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2 py-1 rounded-lg border border-saudiFlag/20">بواكير</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2 mt-2">
+                            <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
+                                <p class="text-xs font-bold text-saudiFlag mb-1">غرس حب الوطن:</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer1}</p>
+                            </div>
+                            <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
+                                <p class="text-xs font-bold text-saudiFlag mb-1">موقف من الحياة اليومية:</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer2}</p>
+                            </div>
+                        </div>
+
+                        ${mediaHTML}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
