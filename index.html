@@ -195,6 +195,7 @@
     <!-- Logic JS -->
     <script>
         let submissions = [];
+        const ADMIN_PASSWORD = "47455"; // الرقم السري المخصص لإدارة المدرسة للحذف
 
         function toggleStudentNameRequired() {
             const role = document.getElementById('userRole').value;
@@ -252,9 +253,16 @@
         }
 
         function deleteSubmission(id) {
-            if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة؟')) {
-                submissions = submissions.filter(item => item.id !== id);
-                updateUI();
+            const password = prompt('عذراً، هذا الإجراء يتطلب صلاحية إدارة المدرسة.\nيرجى إدخال الرقم السري للحذف:');
+            
+            if (password === ADMIN_PASSWORD) {
+                if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة؟')) {
+                    submissions = submissions.filter(item => item.id !== id);
+                    updateUI();
+                    alert('تم حذف المشاركة بنجاح.');
+                }
+            } else if (password !== null) {
+                alert('الرقم السري غير صحيح! لا يمكنك حذف المشاركة.');
             }
         }
 
@@ -300,7 +308,7 @@
                                 <p class="text-xs text-slate-500 font-semibold">${sub.userRole} (${sub.studentGrade})${studentDetails}</p>
                             </div>
                             <div class="flex items-center gap-1">
-                                <button onclick="deleteSubmission(${sub.id})" title="حذف المشاركة" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
+                                <button onclick="deleteSubmission(${sub.id})" title="حذف المشاركة (للإدارة فقط)" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
                                 <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2 py-1 rounded-lg border border-saudiFlag/20">بواكير</span>
                             </div>
                         </div>
