@@ -55,7 +55,7 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 bg-saudiDark/80 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-gold/30 shadow-inner shrink-0">
+            <div class="flex items-center gap-3 bg-saudiDark/85 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-gold/30 shadow-inner shrink-0">
                 <span class="text-sm font-semibold text-emerald-100">إجمالي المشاركات:</span>
                 <span id="counter" class="text-2xl font-black text-gold">0</span>
             </div>
@@ -82,12 +82,12 @@
                 <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة</p>
             </div>
 
-            <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+            <form id="submissionForm" class="space-y-6">
                 
                 <!-- Role Selection -->
                 <div>
                     <label class="block text-sm font-bold text-saudiDark mb-1">صفة المشارك *</label>
-                    <select id="userRole" required onchange="toggleStudentNameRequired()" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
+                    <select id="userRole" required class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
                         <option value="" disabled selected>اختر الصفة...</option>
                         <option value="ولي أمر (أب / أم)">ولي أمر (أب / أم)</option>
                         <option value="مديرة المدرسة">مديرة المدرسة</option>
@@ -110,7 +110,7 @@
                         <label class="block text-sm font-bold text-saudiDark mb-1">
                             اسم الطالب / الطالبة <span id="studentReqMark" class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="studentName" required placeholder="مطلوب لولي الأمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <input type="text" id="studentName" required placeholder="اسم الطالب أو الطالبة" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                 </div>
 
@@ -139,25 +139,9 @@
                         </label>
                         <textarea id="answer2" rows="3" required placeholder="اكتب موقفك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                     </div>
-
-                    <!-- Media Upload Block -->
-                    <div class="bg-white p-4 rounded-xl border-2 border-emerald-100 space-y-3 mt-4">
-                        <label class="block text-sm font-bold text-slate-700">
-                            إرفاق وسائط (اختياري):
-                        </label>
-                        <div class="flex items-center gap-2 text-sm font-bold text-saudiDark bg-emerald-50 p-2.5 rounded-lg border border-emerald-200 w-fit flex-wrap">
-                            <span>🎙️ بالصوت</span>
-                            <span class="text-emerald-300">|</span>
-                            <span>📸 بالصورة</span>
-                            <span class="text-emerald-300">|</span>
-                            <span>🎥 بالفيديو</span>
-                        </div>
-                        <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
-                    </div>
-
                 </div>
 
-                <button type="submit" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
+                <button type="submit" id="submitBtn" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
                     <span>إرسال المشاركة ونشرها في المعرض</span>
                 </button>
             </form>
@@ -171,7 +155,9 @@
             </div>
 
             <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Cards Container -->
+                <div class="text-center py-8 text-gray-500 col-span-2 font-semibold">
+                    جاري تحميل المشاركات اللحظية...
+                </div>
             </div>
         </section>
 
@@ -192,123 +178,105 @@
         </div>
     </footer>
 
-    <!-- Logic JS -->
-    <script>
-        let submissions = [];
-        const ADMIN_PASSWORD = "47455"; // الرقم السري المخصص لإدارة المدرسة للحذف
+    <!-- Firebase Integration & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc, getDocs } 
+               from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        function toggleStudentNameRequired() {
-            const role = document.getElementById('userRole').value;
-            const studentInput = document.getElementById('studentName');
-            const reqMark = document.getElementById('studentReqMark');
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDk6c6HgwYiyz-E3ZLSAafDWpX4pwSaABc",
+            authDomain: "bawakeer-nationalday.firebaseapp.com",
+            projectId: "bawakeer-nationalday",
+            storageBucket: "bawakeer-nationalday.firebasestorage.app",
+            messagingSenderId: "384568251456",
+            appId: "1:384568251456:web:2deb4ea151a241068e7ba5",
+            measurementId: "G-MF6TQBXEM8"
+        };
 
-            if (role === 'ولي أمر (أب / أم)') {
-                studentInput.required = true;
-                reqMark.style.display = 'inline';
-            } else {
-                studentInput.required = false;
-                reqMark.style.display = 'none';
-            }
-        }
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const postsRef = collection(db, "posts");
 
-        function handleFormSubmit(e) {
+        const ADMIN_PASSWORD = "47455";
+
+        const form = document.getElementById("submissionForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const cardsGrid = document.getElementById("cardsGrid");
+        const counter = document.getElementById("counter");
+
+        // Handle Form Submission
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const userRole = document.getElementById('userRole').value;
-            const participantName = document.getElementById('participantName').value;
-            const studentName = document.getElementById('studentName').value;
-            const studentGrade = document.getElementById('studentGrade').value;
-            const answer1 = document.getElementById('answer1').value;
-            const answer2 = document.getElementById('answer2').value;
-            const mediaInput = document.getElementById('mediaFile');
+            const participantName = document.getElementById('participantName').value.trim();
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentGrade = document.getElementById('studentGrade').value.trim();
+            const answer1 = document.getElementById('answer1').value.trim();
+            const answer2 = document.getElementById('answer2').value.trim();
 
-            let mediaUrl = null;
-            let mediaType = null;
+            if (!participantName || !answer1 || !answer2) return;
 
-            if (mediaInput.files && mediaInput.files[0]) {
-                const file = mediaInput.files[0];
-                mediaUrl = URL.createObjectURL(file);
-                if (file.type.startsWith('image/')) mediaType = 'image';
-                else if (file.type.startsWith('audio/')) mediaType = 'audio';
-                else if (file.type.startsWith('video/')) mediaType = 'video';
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري الحفظ في النظام السحابي...";
+
+            try {
+                await addDoc(postsRef, {
+                    userRole,
+                    participantName,
+                    studentName: studentName !== '' ? studentName : 'غير محدد',
+                    studentGrade: studentGrade || 'غير محدد',
+                    answer1,
+                    answer2,
+                    createdAt: serverTimestamp()
+                });
+
+                form.reset();
+                alert('تمت إضافة مشاركتكم الوطنية وحفظها بنجاح دائم في المعرض!');
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("حدث خطأ أثناء الحفظ، يرجى المحاولة مرة أخرى.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "إرسال المشاركة ونشرها في المعرض";
+            }
+        });
+
+        // Real-time listener for posts
+        const q = query(postsRef, orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            cardsGrid.innerHTML = '';
+            counter.innerText = snapshot.docs.length;
+
+            if (snapshot.empty) {
+                cardsGrid.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 col-span-2 bg-white rounded-2xl border-2 border-emerald-100">
+                        لا توجد مشاركات حتى الآن. كوني أول المشاركات!
+                    </div>
+                `;
+                return;
             }
 
-            const newEntry = {
-                id: Date.now(),
-                userRole,
-                participantName,
-                studentName: studentName.trim() !== '' ? studentName : 'غير محدد',
-                studentGrade,
-                answer1,
-                answer2,
-                mediaUrl,
-                mediaType
-            };
+            snapshot.forEach((docSnap) => {
+                const sub = docSnap.data();
+                const docId = docSnap.id;
 
-            submissions.unshift(newEntry);
-            updateUI();
-            document.getElementById('submissionForm').reset();
-            toggleStudentNameRequired();
-            alert('تمت إضافة مشاركتكم الوطنية بنجاح وتم عرضها في المعرض!');
-        }
-
-        function deleteSubmission(id) {
-            const password = prompt('عذراً، هذا الإجراء يتطلب صلاحية إدارة المدرسة.\nيرجى إدخال الرقم السري للحذف:');
-            
-            if (password === ADMIN_PASSWORD) {
-                if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة؟')) {
-                    submissions = submissions.filter(item => item.id !== id);
-                    updateUI();
-                    alert('تم حذف المشاركة بنجاح.');
-                }
-            } else if (password !== null) {
-                alert('الرقم السري غير صحيح! لا يمكنك حذف المشاركة.');
-            }
-        }
-
-        function updateUI() {
-            document.getElementById('counter').innerText = submissions.length;
-
-            const grid = document.getElementById('cardsGrid');
-            grid.innerHTML = '';
-
-            submissions.forEach(sub => {
                 const card = document.createElement('div');
                 card.className = 'bg-white border-2 border-emerald-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all border-t-8 border-t-saudiFlag relative overflow-hidden flex flex-col justify-between';
 
-                let mediaHTML = '';
-                if (sub.mediaType === 'image') {
-                    mediaHTML = `<img src="${sub.mediaUrl}" class="w-full h-48 object-cover rounded-xl mt-3 border border-emerald-100" alt="مشاركة بالصورة">`;
-                } else if (sub.mediaType === 'audio') {
-                    mediaHTML = `
-                        <div class="mt-3 bg-emerald-50 p-2.5 rounded-xl border border-emerald-100">
-                            <span class="text-xs font-bold text-saudiDark mb-1 block">🎙️ استمع للتسجيل الصوتي:</span>
-                            <audio controls class="w-full h-8">
-                                <source src="${sub.mediaUrl}">
-                                متصفحك لا يدعم تشغيل الصوت.
-                            </audio>
-                        </div>`;
-                } else if (sub.mediaType === 'video') {
-                    mediaHTML = `
-                        <div class="mt-3 rounded-xl overflow-hidden border border-emerald-100">
-                            <video controls class="w-full max-h-56 object-cover bg-black">
-                                <source src="${sub.mediaUrl}">
-                                متصفحك لا يدعم تشغيل الفيديو.
-                            </video>
-                        </div>`;
-                }
-
-                const studentDetails = sub.studentName !== 'غير محدد' ? ` | الطالب/ـة: ${sub.studentName}` : '';
+                const studentDetails = sub.studentName && sub.studentName !== 'غير محدد' ? ` | الطالب/ـة: ${sub.studentName}` : '';
 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h4 class="font-extrabold text-saudiFlag text-lg">${sub.participantName}</h4>
-                                <p class="text-xs text-slate-500 font-semibold">${sub.userRole} (${sub.studentGrade})${studentDetails}</p>
+                                <h4 class="font-extrabold text-saudiFlag text-lg">${escapeHTML(sub.participantName)}</h4>
+                                <p class="text-xs text-slate-500 font-semibold">${escapeHTML(sub.userRole)} (${escapeHTML(sub.studentGrade)})${escapeHTML(studentDetails)}</p>
                             </div>
                             <div class="flex items-center gap-1">
-                                <button onclick="deleteSubmission(${sub.id})" title="حذف المشاركة (للإدارة فقط)" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
+                                <button onclick="deleteSubmission('${docId}')" title="حذف المشاركة (للإدارة فقط)" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
                                 <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2 py-1 rounded-lg border border-saudiFlag/20">بواكير</span>
                             </div>
                         </div>
@@ -316,19 +284,43 @@
                         <div class="space-y-2 mt-2">
                             <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
                                 <p class="text-xs font-bold text-saudiFlag mb-1">غرس حب الوطن:</p>
-                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer1}</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${escapeHTML(sub.answer1)}</p>
                             </div>
                             <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
                                 <p class="text-xs font-bold text-saudiFlag mb-1">موقف من الحياة اليومية:</p>
-                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer2}</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${escapeHTML(sub.answer2)}</p>
                             </div>
                         </div>
-
-                        ${mediaHTML}
                     </div>
                 `;
-                grid.appendChild(card);
+                cardsGrid.appendChild(card);
             });
+        });
+
+        // Admin Delete Function
+        window.deleteSubmission = async function(docId) {
+            const password = prompt('عذراً، هذا الإجراء يتطلب صلاحية إدارة المدرسة.\nيرجى إدخال الرقم السري للحذف:');
+            
+            if (password === ADMIN_PASSWORD) {
+                if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة نهائياً؟')) {
+                    try {
+                        await deleteDoc(doc(db, "posts", docId));
+                        alert('تم حذف المشاركة بنجاح من النظام السحابي.');
+                    } catch (err) {
+                        console.error(err);
+                        alert('حدث خطأ أثناء الحذف.');
+                    }
+                }
+            } else if (password !== null) {
+                alert('الرقم السري غير صحيح! لا يمكنك حذف المشاركة.');
+            }
+        };
+
+        // Helper function for security
+        function escapeHTML(str) {
+            return str ? str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            ) : '';
         }
     </script>
 </body>
