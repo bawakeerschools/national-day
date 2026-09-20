@@ -66,7 +66,7 @@
 
     <main class="max-w-4xl mx-auto w-full p-4 flex-grow space-y-8 -mt-2 relative z-20">
 
-        <!-- الوطنية الـ 96 -->
+        <!-- Banner Section -->
         <section class="bg-gradient-to-r from-emerald-900 via-saudiFlag to-emerald-900 text-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gold/40 text-center relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black pointer-events-none">96</div>
             <div class="relative z-10 max-w-3xl mx-auto space-y-2">
@@ -81,19 +81,40 @@
         <section class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-saudiFlag/20">
             <div class="text-center mb-6">
                 <span class="text-3xl mb-1 block">🇸🇦</span>
-                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">مشاركة أولياء الأمور - مدارس بواكير</h2>
-                <p class="text-slate-500 text-xs mt-1">نساهم معاً في ترسيخ القيم الوطنية في نفوس أطفالنا</p>
+                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">منصة المشاركات الوطنية - مدارس بواكير</h2>
+                <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة</p>
             </div>
 
             <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                
+                <!-- Role Selection -->
+                <div>
+                    <label class="block text-sm font-bold text-saudiDark mb-1">صفة المشارك / المسمى الوظيفي *</label>
+                    <select id="userRole" required onchange="toggleStudentNameRequired()" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
+                        <option value="" disabled selected>اختر الصفة أو المسمى الوظيفي...</option>
+                        <option value="ولي أمر (أب / أم)">ولي أمر (أب / أم)</option>
+                        <option value="مديرة المدرسة">مديرة المدرسة</option>
+                        <option value="وكيلة الشؤون التعليمية">وكيلة الشؤون التعليمية</option>
+                        <option value="موجهة طلابية">موجهة طلابية</option>
+                        <option value="مشرفة عامة">مشرفة عامة</option>
+                        <option value="مشرفة اللغة العربية">مشرفة اللغة العربية</option>
+                        <option value="مشرفة اللغة الإنجليزية">مشرفة اللغة الإنجليزية</option>
+                        <option value="مشرفة المواد العلمية">مشرفة المواد العلمية</option>
+                        <option value="معلّمة">معلّمة</option>
+                        <option value="إدارية">إدارية</option>
+                    </select>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-saudiDark mb-1">اسم الطالب / الطالبة *</label>
-                        <input type="text" id="studentName" required placeholder="ادخل اسم الطالب الثلاثي" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <label class="block text-sm font-bold text-saudiDark mb-1">الاسم الكريم (المُشارك) *</label>
+                        <input type="text" id="participantName" required placeholder="ادخل الاسم الثلاثي" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-saudiDark mb-1">اسم ولي الأمر *</label>
-                        <input type="text" id="parentName" required placeholder="ادخل اسم ولي الأمر (الأب / الأم)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <label class="block text-sm font-bold text-saudiDark mb-1">
+                            اسم الطالب / الطالبة <span id="studentReqMark" class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="studentName" required placeholder="اسم الطالب (اختياري لمنسوبات المدرسة)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                 </div>
 
@@ -102,17 +123,25 @@
                     <input type="text" id="studentGrade" required placeholder="مثال: الأول ابتدائي (أ)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                 </div>
 
-                <!-- السؤال المعدل بدون كلمة "يبقى" -->
-                <div class="bg-emerald-50/70 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-3">
+                <!-- Main Question Box -->
+                <div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-3">
                     <label class="block text-sm md:text-base font-black text-saudiDark leading-relaxed">
-                        💭 أبناؤنا سُفراء قيمنا.. ما القيمة الوطنية التي تحرص على غرْسها في قلب طفلك ليعلو بها الوطن شامخاً وعزيزاً؟ *
+                        🇸🇦 كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟
                     </label>
-                    <textarea id="parentMessage" rows="4" required placeholder="اكتب إجابتك ورسالتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
+                    <p class="text-xs md:text-sm font-bold text-emerald-800">
+                        شاركونا موقفاً من حياتكم اليومية علّم طفلكم قيمة وطنية.. دون أن تقولوا كلمة «وطن». *
+                    </p>
+                    <textarea id="parentMessage" rows="4" required placeholder="اكتب موقفك أو رسالتك التربوية هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                 </div>
 
-                <!-- إرفاق ملف وسائط -->
+                <!-- Media Upload Block -->
                 <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">إرفاق وسائط اختيارية (صورة للطفل، تسجيل صوتي، أو فيديو):</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">
+                        إرفاق وسائط (اختياري):
+                    </label>
+                    <p class="text-xs text-slate-500 mb-2 font-semibold">
+                        (بإمكانكم المشاركة بالكتابة أعلاه، أو رفع تسجيل صوتي 🎙️ | صورة 📸 | فيديو 🎥)
+                    </p>
                     <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
                 </div>
 
@@ -155,11 +184,26 @@
     <script>
         let submissions = [];
 
+        function toggleStudentNameRequired() {
+            const role = document.getElementById('userRole').value;
+            const studentInput = document.getElementById('studentName');
+            const reqMark = document.getElementById('studentReqMark');
+
+            if (role === 'ولي أمر (أب / أم)') {
+                studentInput.required = true;
+                reqMark.style.display = 'inline';
+            } else {
+                studentInput.required = false;
+                reqMark.style.display = 'none';
+            }
+        }
+
         function handleFormSubmit(e) {
             e.preventDefault();
 
+            const userRole = document.getElementById('userRole').value;
+            const participantName = document.getElementById('participantName').value;
             const studentName = document.getElementById('studentName').value;
-            const parentName = document.getElementById('parentName').value;
             const studentGrade = document.getElementById('studentGrade').value;
             const parentMessage = document.getElementById('parentMessage').value;
             const mediaInput = document.getElementById('mediaFile');
@@ -177,8 +221,9 @@
 
             const newEntry = {
                 id: Date.now(),
-                studentName,
-                parentName,
+                userRole,
+                participantName,
+                studentName: studentName.trim() !== '' ? studentName : 'غير محدد',
                 studentGrade,
                 parentMessage,
                 mediaUrl,
@@ -188,6 +233,7 @@
             submissions.unshift(newEntry);
             updateUI();
             document.getElementById('submissionForm').reset();
+            toggleStudentNameRequired();
             alert('تمت إضافة مشاركتكم الوطنية بنجاح وتم عرضها في المعرض! 🇸🇦');
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
@@ -224,17 +270,19 @@
                         </div>`;
                 }
 
+                const studentDetails = sub.studentName !== 'غير محدد' ? ` | الطالب/ـة: ${sub.studentName}` : '';
+
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h4 class="font-extrabold text-saudiFlag text-lg">${sub.studentName}</h4>
-                                <p class="text-xs text-slate-500 font-semibold">${sub.studentGrade} | ولي الأمر: ${sub.parentName}</p>
+                                <h4 class="font-extrabold text-saudiFlag text-lg">${sub.participantName}</h4>
+                                <p class="text-xs text-slate-500 font-semibold">${sub.userRole} (${sub.studentGrade})${studentDetails}</p>
                             </div>
                             <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2.5 py-1 rounded-lg border border-saudiFlag/20">🇸🇦 بواكير</span>
                         </div>
                         <div class="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100/60">
-                            <p class="text-xs font-bold text-saudiFlag mb-1">الإجابة على القيمة الوطنية:</p>
+                            <p class="text-xs font-bold text-saudiFlag mb-1">الموقف / القيمة الوطنية:</p>
                             <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.parentMessage}</p>
                         </div>
                         ${mediaHTML}
