@@ -82,7 +82,7 @@
                 <p class="text-slate-500 text-xs mt-1">نرحب بمشاركات أولياء الأمور ومنسوبات المدرسة</p>
             </div>
 
-            <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+            <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
                 
                 <!-- Role Selection -->
                 <div>
@@ -110,7 +110,7 @@
                         <label class="block text-sm font-bold text-saudiDark mb-1">
                             اسم الطالب / الطالبة <span id="studentReqMark" class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="studentName" required placeholder="إذا كنت ولي أمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <input type="text" id="studentName" required placeholder="مطلوب لولي الأمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                 </div>
 
@@ -120,40 +120,41 @@
                 </div>
 
                 <!-- Questions Block -->
-                <div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-5">
+                <div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-6">
                     
-                    <!-- Question 1 -->
-                    <div class="border-b border-emerald-200 pb-3">
-                        <span class="text-xs font-black text-gold bg-saudiDark px-2.5 py-1 rounded-md mb-2 inline-block">السؤال الأول</span>
-                        <h3 class="text-base md:text-lg font-black text-saudiDark leading-relaxed">
-                            كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟
-                        </h3>
+                    <!-- Part 1 -->
+                    <div>
+                        <label class="block text-base md:text-lg font-black text-saudiDark leading-relaxed mb-2">
+                            كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟ *
+                        </label>
+                        <textarea id="answer1" rows="3" required placeholder="اكتب إجابتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                     </div>
 
-                    <!-- Question 2 -->
+                    <hr class="border-emerald-200">
+
+                    <!-- Part 2 -->
                     <div>
-                        <span class="text-xs font-black text-gold bg-saudiDark px-2.5 py-1 rounded-md mb-2 inline-block">السؤال الثاني</span>
-                        <label class="block text-base md:text-lg font-bold text-emerald-950 leading-relaxed mb-2">
+                        <label class="block text-base md:text-lg font-black text-saudiDark leading-relaxed mb-2">
                             شاركونا موقفًا من حياتكم اليومية يُعلّم طفلكم حب الوطن… دون أن تقولوا كلمة «وطن». *
                         </label>
-                        <textarea id="parentMessage" rows="4" required placeholder="اكتب موقفك أو رسالتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
+                        <textarea id="answer2" rows="3" required placeholder="اكتب موقفك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium mb-4"></textarea>
+                        
+                        <!-- Media Upload Block -->
+                        <div class="bg-white p-4 rounded-xl border border-emerald-200">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">
+                                إرفاق وسائط (اختياري):
+                            </label>
+                            <div class="text-sm font-bold text-emerald-800 mb-3 flex items-center gap-2 flex-wrap">
+                                <span>🎙️ بالصوت</span>
+                                <span class="text-slate-300">|</span>
+                                <span>📸 بالصورة</span>
+                                <span class="text-slate-300">|</span>
+                                <span>🎥 بالفيديو</span>
+                            </div>
+                            <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-emerald-100 file:text-saudiDark hover:file:bg-emerald-200 cursor-pointer">
+                        </div>
                     </div>
 
-                </div>
-
-                <!-- Media Upload Block -->
-                <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
-                    <label class="block text-sm font-bold text-slate-700 mb-1">
-                        إرفاق وسائط (اختياري):
-                    </label>
-                    <div class="text-sm font-bold text-saudiDark mb-3 flex items-center gap-2 flex-wrap bg-emerald-100/60 p-2 rounded-lg border border-emerald-200 w-fit">
-                        <span>🎙️ بالصوت</span>
-                        <span class="text-slate-400">|</span>
-                        <span>📸 بالصورة</span>
-                        <span class="text-slate-400">|</span>
-                        <span>🎥 بالفيديو</span>
-                    </div>
-                    <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
                 </div>
 
                 <button type="submit" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
@@ -216,7 +217,8 @@
             const participantName = document.getElementById('participantName').value;
             const studentName = document.getElementById('studentName').value;
             const studentGrade = document.getElementById('studentGrade').value;
-            const parentMessage = document.getElementById('parentMessage').value;
+            const answer1 = document.getElementById('answer1').value;
+            const answer2 = document.getElementById('answer2').value;
             const mediaInput = document.getElementById('mediaFile');
 
             let mediaUrl = null;
@@ -236,7 +238,8 @@
                 participantName,
                 studentName: studentName.trim() !== '' ? studentName : 'غير محدد',
                 studentGrade,
-                parentMessage,
+                answer1,
+                answer2,
                 mediaUrl,
                 mediaType
             };
@@ -301,10 +304,18 @@
                                 <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2 py-1 rounded-lg border border-saudiFlag/20">بواكير</span>
                             </div>
                         </div>
-                        <div class="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100/60">
-                            <p class="text-xs font-bold text-saudiFlag mb-1">الموقف / القيمة الوطنية:</p>
-                            <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.parentMessage}</p>
+                        
+                        <div class="space-y-2 mt-2">
+                            <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
+                                <p class="text-xs font-bold text-saudiFlag mb-1">كيف نغرس حب الوطن؟</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer1}</p>
+                            </div>
+                            <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">
+                                <p class="text-xs font-bold text-saudiFlag mb-1">موقف من الحياة اليومية:</p>
+                                <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.answer2}</p>
+                            </div>
                         </div>
+
                         ${mediaHTML}
                     </div>
                 `;
