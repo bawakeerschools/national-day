@@ -89,12 +89,11 @@
                 
                 <!-- Role Selection -->
                 <div>
-                    <label class="block text-sm font-bold text-saudiDark mb-1">صفة المشارك / المسمى الوظيفي *</label>
+                    <label class="block text-sm font-bold text-saudiDark mb-1">صفة المشارك *</label>
                     <select id="userRole" required onchange="toggleStudentNameRequired()" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition font-semibold text-slate-700">
-                        <option value="" disabled selected>اختر الصفة أو المسمى الوظيفي...</option>
+                        <option value="" disabled selected>اختر الصفة...</option>
                         <option value="ولي أمر (أب / أم)">ولي أمر (أب / أم)</option>
                         <option value="مديرة المدرسة">مديرة المدرسة</option>
-                        <option value="وكيلة الشؤون التعليمية">وكيلة الشؤون التعليمية</option>
                         <option value="موجهة طلابية">موجهة طلابية</option>
                         <option value="مشرفة عامة">مشرفة عامة</option>
                         <option value="مشرفة اللغة العربية">مشرفة اللغة العربية</option>
@@ -114,7 +113,7 @@
                         <label class="block text-sm font-bold text-saudiDark mb-1">
                             اسم الطالب / الطالبة <span id="studentReqMark" class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="studentName" required placeholder="اسم الطالب (اختياري لمنسوبات المدرسة)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <input type="text" id="studentName" required placeholder="إذا كنت ولي أمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                 </div>
 
@@ -123,15 +122,15 @@
                     <input type="text" id="studentGrade" required placeholder="مثال: الأول ابتدائي (أ)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                 </div>
 
-                <!-- Main Question Box -->
+                <!-- Questions Block -->
                 <div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-3">
-                    <label class="block text-sm md:text-base font-black text-saudiDark leading-relaxed">
-                        🇸🇦 كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟
+                    <label class="block text-base md:text-lg font-black text-saudiDark leading-relaxed">
+                        كيف نغرس حب الوطن في أطفالنا دون أن نتحدث عنه؟
                     </label>
-                    <p class="text-xs md:text-sm font-bold text-emerald-800">
-                        شاركونا موقفاً من حياتكم اليومية علّم طفلكم قيمة وطنية.. دون أن تقولوا كلمة «وطن». *
+                    <p class="text-xs md:text-sm font-bold text-emerald-900 leading-normal">
+                        شاركونا موقفًا من حياتكم اليومية يُعلّم طفلكم حب الوطن… دون أن تقولوا كلمة «وطن». *
                     </p>
-                    <textarea id="parentMessage" rows="4" required placeholder="اكتب موقفك أو رسالتك التربوية هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
+                    <textarea id="parentMessage" rows="4" required placeholder="اكتب موقفك أو رسالتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                 </div>
 
                 <!-- Media Upload Block -->
@@ -139,8 +138,8 @@
                     <label class="block text-sm font-bold text-slate-700 mb-1">
                         إرفاق وسائط (اختياري):
                     </label>
-                    <p class="text-xs text-slate-500 mb-2 font-semibold">
-                        (بإمكانكم المشاركة بالكتابة أعلاه، أو رفع تسجيل صوتي 🎙️ | صورة 📸 | فيديو 🎥)
+                    <p class="text-xs text-slate-600 mb-2 font-bold">
+                        🎙️ بالصوت | 📸 بالصورة | 🎥 بالفيديو
                     </p>
                     <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
                 </div>
@@ -235,7 +234,13 @@
             document.getElementById('submissionForm').reset();
             toggleStudentNameRequired();
             alert('تمت إضافة مشاركتكم الوطنية بنجاح وتم عرضها في المعرض! 🇸🇦');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function deleteSubmission(id) {
+            if (confirm('هل أنتِ متأكدة من حذف هذه المشاركة؟')) {
+                submissions = submissions.filter(item => item.id !== id);
+                updateUI();
+            }
         }
 
         function updateUI() {
@@ -279,7 +284,10 @@
                                 <h4 class="font-extrabold text-saudiFlag text-lg">${sub.participantName}</h4>
                                 <p class="text-xs text-slate-500 font-semibold">${sub.userRole} (${sub.studentGrade})${studentDetails}</p>
                             </div>
-                            <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2.5 py-1 rounded-lg border border-saudiFlag/20">🇸🇦 بواكير</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="deleteSubmission(${sub.id})" title="حذف المشاركة" class="text-red-400 hover:text-red-600 p-1 transition text-xs font-bold">🗑️ حذف</button>
+                                <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2 py-1 rounded-lg border border-saudiFlag/20">🇸🇦 بواكير</span>
+                            </div>
                         </div>
                         <div class="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100/60">
                             <p class="text-xs font-bold text-saudiFlag mb-1">الموقف / القيمة الوطنية:</p>
