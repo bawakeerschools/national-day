@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدارس بواكير - تفعيل اليوم الوطني</title>
+    <title>مدارس بواكير - تفعيل اليوم الوطني 96</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Cairo) -->
@@ -50,7 +51,7 @@
                 <div>
                     <div class="inline-flex items-center gap-2 bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/40 mb-1">
                         <span>🌴⚔️</span>
-                        <span>مدارس بواكير الأهلية | اليوم الوطني السعودي</span>
+                        <span>مدارس بواكير الأهلية | اليوم الوطني السعودي 96</span>
                     </div>
                     <h1 class="text-2xl md:text-3xl font-black text-white leading-tight">رسائل من القلب إلى أجيال الوطن</h1>
                     <p class="text-emerald-200 text-xs font-semibold mt-0.5">متانة التأسيس وقوة البداية</p>
@@ -66,14 +67,23 @@
 
     <main class="max-w-4xl mx-auto w-full p-4 flex-grow space-y-8 -mt-2 relative z-20">
 
+        <!-- الوطنية الـ 96 المضافة -->
+        <section class="bg-gradient-to-r from-emerald-900 via-saudiFlag to-emerald-900 text-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gold/40 text-center relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black pointer-events-none">96</div>
+            <div class="relative z-10 max-w-3xl mx-auto space-y-2">
+                <span class="bg-gold/20 text-goldLight text-xs font-bold px-3 py-1 rounded-full border border-gold/30 inline-block mb-1">🇸🇦 اليوم الوطني 96</span>
+                <p class="text-base md:text-lg font-bold leading-relaxed text-emerald-50">
+                    "بالتعليم تبنى الأوطان، وبأبنائنا تتجدد الطموحات.. في عامنا الـ 96 نواصل رحلة الشغف والتأسيس لمستقبل وطن لا يرضى إلا بالقمة."
+                </p>
+            </div>
+        </section>
+
         <!-- Form Section -->
         <section class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-saudiFlag/20">
             <div class="text-center mb-6">
-                <span class="text-3xl mb-2 block">🇸🇦</span>
-                <h2 class="text-xl md:text-2xl font-black text-saudiFlag mb-3">مشاركة أولياء الأمور - مدارس بواكير</h2>
-                <div class="bg-emerald-50 border-r-4 border-saudiFlag p-4 rounded-xl text-slate-700 text-sm md:text-base font-bold leading-relaxed">
-                    "ما هي الرسالة أو القيمة الوطنية التي تتمنى أن يغرسها هذا الوطن العظيم في قلب طفلك اليوم ليحملها معه للمستقبل؟"
-                </div>
+                <span class="text-3xl mb-1 block">🇸🇦</span>
+                <h2 class="text-xl md:text-2xl font-black text-saudiFlag">مشاركة أولياء الأمور - مدارس بواكير</h2>
+                <p class="text-slate-500 text-xs mt-1">نساهم معاً في ترسيخ القيم الوطنية في نفوس أطفالنا</p>
             </div>
 
             <form id="submissionForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
@@ -84,7 +94,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-saudiDark mb-1">اسم ولي الأمر *</label>
-                        <input type="text" id="parentName" required placeholder="ادخل اسم ولي الأمر" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
+                        <input type="text" id="parentName" required placeholder="ادخل اسم ولي الأمر (الأب / الأم)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                     </div>
                 </div>
 
@@ -93,21 +103,22 @@
                     <input type="text" id="studentGrade" required placeholder="مثال: الأول ابتدائي (أ)" class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition">
                 </div>
 
-                <!-- نص الرسالة -->
-                <div>
-                    <label class="block text-sm font-bold text-saudiDark mb-1">رسالتك أو دعاءك للوطن *</label>
-                    <textarea id="parentMessage" rows="3" required placeholder="اكتب كلمتك العذبة أو دعاءك للوطن ولابنك..." class="w-full px-4 py-2.5 border-2 border-emerald-100 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition"></textarea>
+                <!-- السؤال الرئيسي للحقل -->
+                <div class="bg-emerald-50/70 p-5 rounded-2xl border-2 border-saudiFlag/30 space-y-3">
+                    <label class="block text-sm md:text-base font-black text-saudiDark leading-relaxed">
+                        💭 ما هي الرسالة أو القيمة الوطنية التي تتمنى أن يغرسها هذا الوطن العظيم في قلب طفلك اليوم ليحملها معه للمستقبل؟ *
+                    </label>
+                    <textarea id="parentMessage" rows="4" required placeholder="اكتب إجابتك ورسالتك هنا..." class="w-full px-4 py-3 bg-white border-2 border-emerald-200 rounded-xl focus:border-saudiFlag focus:ring-2 focus:ring-saudiFlag/20 focus:outline-none transition text-slate-700 font-medium"></textarea>
                 </div>
 
                 <!-- إرفاق ملف وسائط (صورة / صوت / فيديو) -->
-                <div class="bg-emerald-50/60 p-4 rounded-2xl border-2 border-dashed border-emerald-200">
-                    <label class="block text-sm font-bold text-saudiDark mb-2">إرفاق وسائط (اختر صورة، تسجيل صوتي، أو مقطع فيديو قصير):</label>
+                <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-300">
+                    <label class="block text-sm font-bold text-slate-700 mb-2">إرفاق وسائط اختيارية (صورة للطفل، تسجيل صوتي، أو فيديو):</label>
                     <input type="file" id="mediaFile" accept="image/*,audio/*,video/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-saudiFlag file:text-white hover:file:bg-saudiDark cursor-pointer">
-                    <p class="text-xs text-slate-500 mt-1">يمكن رفع مقاطع فيديو أو صوات أو صور احتفالية للأبناء بالزي الوطني.</p>
                 </div>
 
                 <button type="submit" class="w-full saudi-gradient hover:bg-saudiDark text-white font-extrabold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 border border-gold/40 text-lg">
-                    <span>🇸🇦 إرسال المشاركة</span>
+                    <span>🇸🇦 إرسال المشاركة وعرضها بالحائط</span>
                 </button>
             </form>
         </section>
@@ -126,9 +137,19 @@
 
     </main>
 
-    <footer class="saudi-gradient text-white text-center py-6 mt-12 border-t-2 border-gold">
-        <p class="text-sm font-semibold text-emerald-100">مدارس بواكير الأهلية - دمت يا وطني شامخاً عزيزاً 🇸🇦</p>
-        <p class="text-xs text-emerald-200/60 mt-1">جميع الحقوق محفوظة © اليوم الوطني السعودي</p>
+    <!-- Footer Section with updated credits -->
+    <footer class="saudi-gradient text-white py-8 mt-12 border-t-2 border-gold relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-3 relative z-10">
+            <p class="text-base font-bold text-goldLight">مدارس بواكير الأهلية - دمت يا وطني شامخاً عزيزاً 🇸🇦</p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs md:text-sm font-semibold text-emerald-100 bg-saudiDark/60 py-2.5 px-4 rounded-xl border border-gold/20 max-w-2xl mx-auto">
+                <span>إعداد وكيلة الشؤون التعليمية: <strong>أ. بدرية العتيبي</strong></span>
+                <span class="hidden sm:inline text-gold">|</span>
+                <span>إشراف مديرة المدرسة: <strong>أ. ريم الدوسري</strong></span>
+            </div>
+
+            <p class="text-xs text-emerald-200/70 pt-2">جميع الحقوق محفوظة لمدارس بواكير © 2026</p>
+        </div>
     </footer>
 
     <!-- Logic JS -->
@@ -168,7 +189,8 @@
             submissions.unshift(newEntry);
             updateUI();
             document.getElementById('submissionForm').reset();
-            alert('تمت إضافة مشاركتكم الوطنية بنجاح! 🇸🇦');
+            alert('تمت إضافة مشاركتكم الوطنية بنجاح وتم عرضها بالحائط! 🇸🇦');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
         function updateUI() {
@@ -186,7 +208,7 @@
                     mediaHTML = `<img src="${sub.mediaUrl}" class="w-full h-48 object-cover rounded-xl mt-3 border border-emerald-100" alt="مشاركة بالصورة">`;
                 } else if (sub.mediaType === 'audio') {
                     mediaHTML = `
-                        <div class="mt-3 bg-emerald-50 p-2 rounded-xl border border-emerald-100">
+                        <div class="mt-3 bg-emerald-50 p-2.5 rounded-xl border border-emerald-100">
                             <span class="text-xs font-bold text-saudiDark mb-1 block">🎙️ استمع للتسجيل الصوتي:</span>
                             <audio controls class="w-full h-8">
                                 <source src="${sub.mediaUrl}">
@@ -210,9 +232,12 @@
                                 <h4 class="font-extrabold text-saudiFlag text-lg">${sub.studentName}</h4>
                                 <p class="text-xs text-slate-500 font-semibold">${sub.studentGrade} | ولي الأمر: ${sub.parentName}</p>
                             </div>
-                            <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2.5 py-1 rounded-lg border border-saudiFlag/20">🇸🇦 مدارس بواكير</span>
+                            <span class="text-xs bg-emerald-100 text-saudiDark font-black px-2.5 py-1 rounded-lg border border-saudiFlag/20">🇸🇦 بواكير</span>
                         </div>
-                        <p class="text-slate-700 text-sm font-medium leading-relaxed bg-emerald-50/50 p-3 rounded-xl border border-emerald-100/60">${sub.parentMessage}</p>
+                        <div class="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100/60">
+                            <p class="text-xs font-bold text-saudiFlag mb-1">الإجابة على القيمة الوطنية:</p>
+                            <p class="text-slate-700 text-sm font-medium leading-relaxed">${sub.parentMessage}</p>
+                        </div>
                         ${mediaHTML}
                     </div>
                 `;
